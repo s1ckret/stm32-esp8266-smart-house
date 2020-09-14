@@ -4,6 +4,8 @@ import socket
 host='192.168.0.107'
 port=30000
 
+httpHeader = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: "
+
 def main():
     serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     serverSocket.bind((host, port))
@@ -14,7 +16,7 @@ def main():
         print("Waiting for new connections...")
         # accept method blocks loop until someone has connected to server
         clientsocket, address = serverSocket.accept()
-        print(f"Connection from {address} has been established.\n Created client socket: {clientsocket}")
+        print(f"Connection from {address} has been established.")
 
         print("Waiting for new message...")
         # 1500 - max ETHERNET packet
@@ -22,8 +24,11 @@ def main():
         msg = msg.decode("utf-8")
         print(f">== Message: {msg}")
 
+        f = open("index.html", "r")
+        content = f.read()
+
         print("Sending message...")
-        httpResponse = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!"
+        httpResponse = httpHeader + str(len(content)) + "\n\n" + content
         clientsocket.send(httpResponse.encode("utf-8"))
         print("Message sent")
 
