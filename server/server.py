@@ -15,14 +15,18 @@ def main():
         # accept method blocks loop until someone has connected to server
         clientsocket, address = serverSocket.accept()
         print(f"Connection from {address} has been established.\n Created client socket: {clientsocket}")
+
         print("Waiting for new message...")
         # 1500 - max ETHERNET packet
         msg = clientsocket.recv(1500)
         msg = msg.decode("utf-8")
         print(f">== Message: {msg}")
+
         print("Sending message...")
-        clientsocket.send("Hello from server".encode("utf-8"))
+        httpResponse = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!"
+        clientsocket.send(httpResponse.encode("utf-8"))
         print("Message sent")
+
         clientsocket.close()
         print("Connection closed")
 
