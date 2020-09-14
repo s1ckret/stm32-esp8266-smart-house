@@ -62,6 +62,7 @@ void Error_Handler(void);
 #define Led_GPIO_Port GPIOB
 #define Button_Pin GPIO_PIN_11
 #define Button_GPIO_Port GPIOB
+#define Button_EXTI_IRQn EXTI15_10_IRQn
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
