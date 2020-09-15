@@ -5,7 +5,17 @@ import threading
 host='192.168.0.107'
 port=30000
 
-httpHeader = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: "
+# @status - int
+def response_header(status):
+    return "HTTP/1.1 {} OK\n".format(status)
+
+# @type - str
+def response_content_type(type):
+    return "Content-Type: {}\n".format(type)
+
+# @len - int
+def response_content_length(len):
+    return "Content-Length: {}\n\n".format(len)
 
 def handle_get_request(args):
     pass
