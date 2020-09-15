@@ -1,10 +1,22 @@
 import socket
+import threading
 
 # Check your ip with "ipconfig" cmd
 host='192.168.0.107'
 port=30000
 
 httpHeader = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: "
+
+def handle_client(conn, address):
+    print(f"Connection from {address} has been established.")
+
+    while True:
+        msg = conn.recv(2048).decode("utf-8")
+        print(f"Message received:\n==========\n{msg}\n==========\n")
+        conn.send("Msg received".encode("utf-8"))
+    conn.close()
+    print(f"Connection from {address} has been closed.")
+
 
 def main():
     serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -16,24 +28,9 @@ def main():
         print("Waiting for new connections...")
         # accept method blocks loop until someone has connected to server
         clientsocket, address = serverSocket.accept()
-        print(f"Connection from {address} has been established.")
-
-        print("Waiting for new message...")
-        # 1500 - max ETHERNET packet
-        msg = clientsocket.recv(1500)
-        msg = msg.decode("utf-8")
-        print(f">== Message: {msg}")
-
-        f = open("index.html", "r")
-        content = f.read()
-
-        print("Sending message...")
-        httpResponse = httpHeader + str(len(content)) + "\n\n" + content
-        clientsocket.send(httpResponse.encode("utf-8"))
-        print("Message sent")
-
-        clientsocket.close()
-        print("Connection closed")
+        thread = threading.Thread(target=handle_client, args=(clientsocket, address))
+        thread.start()
+        print(f"Active threads count: {threading.activeCount() - 1}")
 
 if __name__ == "__main__":
     main()
