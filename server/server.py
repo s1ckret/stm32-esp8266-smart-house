@@ -7,12 +7,22 @@ port=30000
 
 httpHeader = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: "
 
+def handle_get_request(args):
+    pass
+
+def handle_http_request(request, args):
+    if (request == "GET"):
+        handle_get_request(args)
+
 def handle_client(conn, address):
     print(f"Connection from {address} has been established.")
 
     while True:
         msg = conn.recv(2048).decode("utf-8")
         print(f"Message received:\n==========\n{msg}\n==========\n")
+        args = msg.split(" ", 2)
+        # TODO: pass better args
+        handle_http_request(args[0], args)
         conn.send("Msg received".encode("utf-8"))
     conn.close()
     print(f"Connection from {address} has been closed.")
