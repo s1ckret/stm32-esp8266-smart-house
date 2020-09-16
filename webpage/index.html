@@ -5,19 +5,28 @@
   <title>Test</title>
   <script type="text/javascript">
 
-    let temp = 1;
-    let ligth = 1;
-
     function LigthSwitch(){
       alert("Button");
     }
-
+    
+    function loadFile(filePath) {
+      var result = null;
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET", filePath, false);
+      xmlhttp.send();
+      if (xmlhttp.status==200) {
+        result = xmlhttp.responseText;
+      }
+      return result;
+    }
+    
     let interval = setInterval(ServerCheck, 500);
     function ServerCheck() {
-        temp+=1;
-        document.getElementById("Temperature").value=temp;
-        ligth = (ligth+1)%2;
-        if(ligth == 1)
+        var temperature = loadFile("temperature.txt")
+        var ledStatus = loadFile("ledStatus.txt")
+        document.getElementById("Temperature").value = parseInt(temperature, 10);
+
+        if(parseInt(ledStatus, 10) == 1)
             document.getElementById("Led").innerHTML="Led is now On";
         else
             document.getElementById("Led").innerHTML="Led is now Off";
