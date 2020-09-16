@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Test</title>
+  <script type="text/javascript">
+
+    let temp = 1;
+    let ligth = 1;
+
+    function LigthSwitch(){
+      alert("Button");
+    }
+
+    let interval = setInterval(ServerCheck, 500);
+    function ServerCheck() {
+        temp+=1;
+        document.getElementById("Temperature").value=temp;
+        ligth = (ligth+1)%2;
+        if(ligth == 1)
+            document.getElementById("Led").innerHTML="Led is now On";
+        else
+            document.getElementById("Led").innerHTML="Led is now Off";
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Smart House Control Panel</h1>
+  </header>
+  <form name="LigthControl" id="LigthControl">
+    <input id="Temperature" value="0"> <input name="Switch" type="button" value="ON/OFF" onclick="LigthSwitch();">
+  </form>
+  <h2 id="Led">Led is now</h2>
+</body>
+</html>
