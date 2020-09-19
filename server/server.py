@@ -18,7 +18,6 @@ def handle_client(conn, address):
         response = http.handle_http_request(args[0], args)
         print(f"Response\n{response}\n")
         conn.send(response.encode("utf-8"))
-        break
     conn.close()
     print(f"Connection from {address} has been closed.")
 
