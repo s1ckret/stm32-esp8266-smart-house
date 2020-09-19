@@ -13,13 +13,18 @@ def response_content_type(type):
 def response_content_length(len):
     return "Content-Length: {}\n\n".format(len)
 
+def parse_file_extension(file_name):
+    return "text/html"
+
 def handle_get_request(file_name):
     # TODO: Add file type parsing
     # Example: if .html then content_type = text/html
     # Example: is .css then content_type = text/css
     if (file_name == "/"): 
         file_name = "index.html"
-
+    
+    content_type = parse_file_extension(file_name)
+    
     response = ""
     try:
         with open(fileRoot + file_name, 'r') as file:
@@ -27,7 +32,7 @@ def handle_get_request(file_name):
             file_len = len(file_str)
 
             response += response_header(200)
-            response += response_content_type("text/html")
+            response += response_content_type(content_type)
             response += response_content_length(file_len)
             response += file_str
             return response
