@@ -20,7 +20,10 @@ def handle_get_request(file_name):
     # TODO: Add file type parsing
     # Example: if .html then content_type = text/html
     # Example: is .css then content_type = text/css
-    if (file_name == "/"): 
+
+    file_name = file_name[1:]
+
+    if (file_name == ""):
         file_name = "index.html"
     
     content_type = parse_file_extension(file_name)
