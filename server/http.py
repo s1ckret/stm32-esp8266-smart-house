@@ -14,8 +14,7 @@ def response_content_type(type):
 def response_content_length(len):
     return "Content-Length: {}\n\n".format(len)
 
-def handle_get_request(args):
-    file_name = args[1]
+def handle_get_request(file_name):
     # TODO: Add file type parsing
     # Example: if .html then content_type = text/html
     # Example: is .css then content_type = text/css
@@ -36,8 +35,10 @@ def handle_get_request(args):
         response += "ERROR: There is no file {}".format(fileRoot + file_name)
     return response
 
-def handle_http_request(request, args):
+def handle_http_request(request):
+    args = request.split(" ", 2)
+
     response = ""
-    if (request == "GET"):
-        response = handle_get_request(args)
+    if (args[0] == "GET"):
+        response = handle_get_request(args[1])
     return response
