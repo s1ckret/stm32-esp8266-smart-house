@@ -1,4 +1,3 @@
-import os
 
 fileRoot = "../webpage/"
 
@@ -22,18 +21,19 @@ def handle_get_request(file_name):
         file_name = "index.html"
 
     response = ""
-    if (os.path.isfile(fileRoot + file_name)):
-        file = open(fileRoot + file_name)
-        file_str = file.read()
-        file_len = len(file_str)
+    try:
+        with open(fileRoot + file_name, 'r') as file:
+            file_str = file.read()
+            file_len = len(file_str)
 
-        response += response_header(200)
-        response += response_content_type("text/html")
-        response += response_content_length(file_len)
-        response += file_str
-    else:
-        response += "ERROR: There is no file {}".format(fileRoot + file_name)
-    return response
+            response += response_header(200)
+            response += response_content_type("text/html")
+            response += response_content_length(file_len)
+            response += file_str
+            return response
+    except OSError as e:
+        print("ERROR {}: There is no file {}".format(e.errno, fileRoot + file_name))
+
 
 def handle_http_request(request):
     args = request.split(" ", 2)
