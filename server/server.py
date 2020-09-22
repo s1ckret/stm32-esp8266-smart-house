@@ -13,6 +13,9 @@ def handle_client(conn, address):
     while True:
         msg = conn.recv(2048).decode("utf-8")
         print(f"Request\n{msg}\n")
+        if (msg == ''):
+            break
+        
         response = http.handle_http_request(msg)
         print(f"Response\n{response}\n")
         conn.send(response.encode("utf-8"))
