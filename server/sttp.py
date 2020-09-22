@@ -1,5 +1,12 @@
 # S1ckret Team Transfer Protocol
 
+import constants
+
+dict_sensor_id_to_file = {
+ 1 : "ledStatus.txt",
+ 2 : "temperature.txt"
+}
+
 def handle_R_frame(msg):
     sensor_id = msg[1]
     payload_size = msg[2]
