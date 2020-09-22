@@ -2,6 +2,7 @@ import socket
 import threading
 
 import http
+import sttp
 
 # Check your ip with "ipconfig" cmd
 host='192.168.0.107'
@@ -17,6 +18,8 @@ def handle_client(conn, address):
             break
         
         response = http.handle_http_request(msg)
+        if (response == b''):
+            response = sttp.handle_sttp_msg(msg)
         print(f"Response\n{response}\n")
         conn.send(response)
     conn.close()
