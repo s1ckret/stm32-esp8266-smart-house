@@ -1,0 +1,40 @@
+* {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1 {
+    font-size: 400%;
+    font-weight: bold;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+table {
+    font-size: 40px;
+    margin: auto;
+}
+
+.table-aligin {
+    text-align: center;
+    font-weight: bold;
+}
+
+.imgSize {
+    width: 100%;
+}
+
+.off {
+    color: #7c5050;
+}
+
+.on {
+    color: #566c45;
+}
+
+td {
+    text-align: center;
+    padding-left: 125px;
+    padding-right: 125px;
+    padding-top: 50px;
+}

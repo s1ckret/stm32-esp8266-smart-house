@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Test</title>
     <link rel="stylesheet" href="css/zeroing.css">
+    <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript">
         function LigthSwitch() {
             alert("Button");
@@ -38,22 +39,37 @@
 
 <body>
 
-    <head>
+    <header>
         <h1>
             Smart House control panel
         </h1>
-    </head>
+    </header>
     <div>
 
-        <div>
-            Switch Temperature LED status
-        </div>
+        <table>
+            <tr>
+                <td>Switch</td>
+                <td>Temperature</td>
+                <td>LED status</td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="table-aligin"><span class="on">ON</span></p>
+                    <img class="imgSize" src="img/switch-contur-res.png" alt="">
+                    <p class="table-aligin"><span class="off">OFF</span></p>
+                </td>
+                <td>
+                    <form action="#">
+                        <output name="Temperature" id="Temperature">0</output> °C
 
-        <div>
-            <img src="" alt="">
-            <img src="" alt="">
-            <img src="" alt="">
-        </div>
+                    </form>
+
+                </td>
+                <td>
+                    <img class="imgSize" src="img/led.png" alt="">
+                </td>
+            </tr>
+        </table>
 
     </div>
 
