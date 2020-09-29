@@ -34,6 +34,25 @@
             else
                 document.getElementById("Led").innerHTML = "Led is now Off";
         }
+        let counter = 1;
+
+        function smth() {
+            let src1 = "img/switch-contur-res.png";
+            let src2 = "img/switch-contur-on.png";
+
+
+
+            if (counter == 0) {
+                document.getElementById("switch").src = src1;
+            } else {
+                document.getElementById("switch").src = src2;
+            }
+            if (counter == 1) {
+                counter = 0;
+            } else {
+                counter = 1;
+            }
+        }
     </script>
 </head>
 
@@ -54,9 +73,12 @@
             </tr>
             <tr>
                 <td>
-                    <p class="table-aligin"><span class="on">ON</span></p>
-                    <img class="imgSize" src="img/switch-contur-res.png" alt="">
-                    <p class="table-aligin"><span class="off">OFF</span></p>
+                    <form name="control" id="control">
+
+                        <p class="table-aligin"><span class="on">ON</span></p>
+                        <img id="switch" class="imgSize" src="img/switch-contur-res.png" alt="" onclick="smth()">
+                        <p class="table-aligin"><span class="off">OFF</span></p>
+                    </form>
                 </td>
                 <td>
                     <form action="#">
