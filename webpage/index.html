@@ -27,12 +27,15 @@
         function ServerCheck() {
             var temperature = loadFile("temperature.txt")
             var ledStatus = loadFile("ledStatus.txt")
+            let imgSrcOff = "img/led.png";
+            let imgSrcOn = "img/led-on.png";
+            
             document.getElementById("Temperature").value = parseInt(temperature, 10);
 
             if (parseInt(ledStatus, 10) == 1)
-                document.getElementById("Led").innerHTML = "Led is now On";
+                document.getElementById("Led").src = imgSrcOn;
             else
-                document.getElementById("Led").innerHTML = "Led is now Off";
+                document.getElementById("Led").src = imgSrcOff;
         }
         let counter = 1;
 
@@ -88,7 +91,7 @@
 
                 </td>
                 <td>
-                    <img class="imgSize" src="img/led.png" alt="">
+                    <img id="Led" class="imgSize" src="img/led.png" alt="">
                 </td>
             </tr>
         </table>
