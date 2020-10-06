@@ -29,7 +29,7 @@
             var ledStatus = loadFile("ledStatus.txt")
             let imgSrcOff = "img/led.png";
             let imgSrcOn = "img/led-on.png";
-            
+
             document.getElementById("Temperature").value = parseInt(temperature, 10);
 
             if (parseInt(ledStatus, 10) == 1)
@@ -66,36 +66,26 @@
             Smart House control panel
         </h1>
     </header>
-    <div>
+    <div class="SWITCH">
+        <div class="name"> Switch</div>
 
-        <table>
-            <tr>
-                <td>Switch</td>
-                <td>Temperature</td>
-                <td>LED status</td>
-            </tr>
-            <tr>
-                <td>
-                    <form name="control" id="control">
-
-                        <p class="table-aligin"><span class="on">ON</span></p>
-                        <img id="switch" class="imgSize" src="img/switch-contur-res.png" alt="" onclick="smth()">
-                        <p class="table-aligin"><span class="off">OFF</span></p>
-                    </form>
-                </td>
-                <td>
-                    <form action="#">
-                        <output name="Temperature" id="Temperature">0</output> °C
-
-                    </form>
-
-                </td>
-                <td>
-                    <img id="Led" class="imgSize" src="img/led.png" alt="">
-                </td>
-            </tr>
-        </table>
-
+        <div class="statusOn">On</div>
+        <div class="switcher"> </div>
+        <div class="buttonON"></div>
+        <div class="buttonOFF"></div>
+        <div class="statusOff">Off</div>
+    </div>
+    <div class="TEMPERATURE">
+        <div class="name">Temperature</div>
+        <div class="statusTemp">
+            <form action=" # "></form>
+            <output>°C</output>
+        </div>
+    </div>
+    <div class="LED ">
+        <div class="name">LED status</div>
+        <div class="led"></div>
+        <div class="ledON"></div>
     </div>
 
 </body>
