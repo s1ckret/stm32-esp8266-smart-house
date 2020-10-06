@@ -26,7 +26,6 @@ h1 {
     margin-top: 25px;
     width: 130px;
     height: 90px;
-    visibility: hidden;
 }
 
 .buttonOFF {
@@ -34,7 +33,7 @@ h1 {
     border-radius: 5%;
     background-color: black;
     margin-left: 28%;
-    margin-top: 50px;
+    margin-top: 165px;
     width: 130px;
     height: 90px;
 }
@@ -99,8 +98,10 @@ h1 {
 
 .statusOff {
     font-size: 200%;
-    margin-top: 7%;
-    margin-bottom: 5%;
+    margin-top: 20px;
+    margin-left: 130px;
+    margin-right: 60px;
+    float: left;
 }
 
 .statusTemp {

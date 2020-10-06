@@ -24,37 +24,37 @@
 
         let interval = setInterval(ServerCheck, 500);
 
+        function updateTemperature(temperature) {
+            document.getElementById("Temperature").value = parseInt(temperature, 10);
+        }
+
+        function updateLed(ledStatus) {
+            if (parseInt(ledStatus, 10) == 1)
+                document.getElementById("ledON").hidden = true;
+            else
+                document.getElementById("ledON").hidden = false;
+        }
+
         function ServerCheck() {
             var temperature = loadFile("temperature.txt")
             var ledStatus = loadFile("ledStatus.txt")
-            let imgSrcOff = "img/led.png";
-            let imgSrcOn = "img/led-on.png";
 
-            document.getElementById("Temperature").value = parseInt(temperature, 10);
+            updateTemperature(temperature);
+            updateLed(ledStatus);
 
-            if (parseInt(ledStatus, 10) == 1)
-                document.getElementById("Led").src = imgSrcOn;
-            else
-                document.getElementById("Led").src = imgSrcOff;
         }
-        let counter = 1;
 
-        function smth() {
-            let src1 = "img/switch-contur-res.png";
-            let src2 = "img/switch-contur-on.png";
+        let counter = true;
 
-
-
+        function ChangeStatus() {
             if (counter == 0) {
-                document.getElementById("switch").src = src1;
+                document.getElementById("butOn").hidden = true;
+                document.getElementById("butOff").hidden = false;
             } else {
-                document.getElementById("switch").src = src2;
+                document.getElementById("butOn").hidden = false;
+                document.getElementById("butOff").hidden = true;
             }
-            if (counter == 1) {
-                counter = 0;
-            } else {
-                counter = 1;
-            }
+            counter = !counter;
         }
     </script>
 </head>
@@ -70,16 +70,18 @@
         <div class="name"> Switch</div>
 
         <div class="statusOn">On</div>
-        <div class="switcher"> </div>
-        <div class="buttonON"></div>
-        <div class="buttonOFF"></div>
+        <div class="switcher" onclick="ChangeStatus()"> </div>
+        <div class="buttonON" id="butOn" hidden></div>
+        <div class="buttonOFF" id="butOff"></div>
         <div class="statusOff">Off</div>
     </div>
     <div class="TEMPERATURE">
         <div class="name">Temperature</div>
         <div class="statusTemp">
-            <form action=" # "></form>
-            <output>°C</output>
+            <form action=" # ">
+                <output id="Temperature">0</output>°C
+            </form>
+
         </div>
     </div>
     <div class="LED ">
