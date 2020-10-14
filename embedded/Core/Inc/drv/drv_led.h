@@ -18,4 +18,6 @@ void drv_led_on(enum drv_led_name me);
 
 void drv_led_off(enum drv_led_name me);
 
+void drv_led_toggle(enum drv_led_name me);
+
 #endif /* INC_DRV_DRV_LED_H_ */
