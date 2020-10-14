@@ -23,7 +23,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "drv/drv_led.h"
+#include "utl/utl_heartbeat.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -101,6 +102,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    utl_run_heartbeat(DRV_LED_HEARTBEAT, 100U, 500U);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
