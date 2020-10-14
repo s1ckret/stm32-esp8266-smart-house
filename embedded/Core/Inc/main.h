@@ -58,6 +58,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define Heartbeat_Pin GPIO_PIN_13
+#define Heartbeat_GPIO_Port GPIOC
 #define Led_Pin GPIO_PIN_10
 #define Led_GPIO_Port GPIOB
 #define Button_Pin GPIO_PIN_11
