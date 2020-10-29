@@ -35,4 +35,6 @@ void utl_uart_irq_handler(enum utl_uart_name me);
 
 void utl_uart_read(enum utl_uart_name me, uint8_t *target, uint32_t len);
 
+void utl_uart_run(enum utl_uart_name me);
+
 #endif /* INC_UTL_UTL_UART_H_ */
