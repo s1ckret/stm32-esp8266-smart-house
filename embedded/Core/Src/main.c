@@ -99,6 +99,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    utl_uart_run(UTL_UART_ESP8266);
     utl_run_heartbeat(DRV_LED_HEARTBEAT, 100U, 500U);
     /* USER CODE END WHILE */
 
