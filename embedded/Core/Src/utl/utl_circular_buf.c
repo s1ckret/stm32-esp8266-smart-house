@@ -14,7 +14,7 @@
 static void _circular_buf_advance_pointer(utl_circular_buf_handle cbuf);
 static void _circular_buf_advance_pointer_by_n(utl_circular_buf_handle cbuf, uint32_t n);
 static void _circular_buf_retreat_pointer(utl_circular_buf_handle cbuf);
-
+static void _circular_buf_retreat_pointer_by_n(utl_circular_buf_handle cbuf, uint32_t n);
 static struct utl_circular_buf cb;
 
 utl_circular_buf_handle circular_buffer = &cb;
@@ -103,6 +103,22 @@ uint32_t utl_circular_buf_size(utl_circular_buf_handle cbuf) {
   return size;
 }
 
+
+uint8_t *utl_circular_buf_get_tail_ptr(utl_circular_buf_handle cbuf) {
+  return &cbuf->buf[cbuf->tail];
+}
+
+uint8_t utl_circular_buf_get_avail_elem_count_with_advance(utl_circular_buf_handle cbuf) {
+  uint32_t size = cbuf->head - cbuf->tail;
+  if (cbuf->head < cbuf->tail) {
+    /* Get size till the end. */
+    size = cbuf->capacity - cbuf->tail;
+  }
+
+  _circular_buf_retreat_pointer_by_n(cbuf, size);
+  return size;
+}
+
 static void _circular_buf_advance_pointer(utl_circular_buf_handle cbuf) {
   assert_param(cbuf);
 
@@ -127,3 +143,9 @@ static void _circular_buf_retreat_pointer(utl_circular_buf_handle cbuf) {
   cbuf->tail = (++cbuf->tail) % cbuf->capacity;
 }
 
+static void _circular_buf_retreat_pointer_by_n(utl_circular_buf_handle cbuf, uint32_t n) {
+  assert_param(cbuf && n);
+
+  cbuf->tail = (cbuf->tail + n) % cbuf->capacity;
+  cbuf->is_full = 0;
+}
