@@ -25,6 +25,8 @@
 /* USER CODE BEGIN Includes */
 #include "drv/drv_led.h"
 #include "utl/utl_uart.h"
+
+#include "event/modules/e_module_timers.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -189,7 +191,7 @@ void SysTick_Handler(void)
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
   /* USER CODE BEGIN SysTick_IRQn 1 */
-
+  e_module_timers_tick();
   /* USER CODE END SysTick_IRQn 1 */
 }
 

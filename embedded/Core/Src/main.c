@@ -26,6 +26,10 @@
 #include "drv/drv_led.h"
 #include "utl/utl_heartbeat.h"
 #include "utl/utl_uart.h"
+
+#include "event/modules/e_module.h"
+#include "event/modules/e_module_core.h"
+#include "event/modules/e_module_heartbeat.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -91,16 +95,31 @@ int main(void)
   MX_GPIO_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  utl_uart_init(UTL_UART_ESP8266, USART1, 115200);
-  utl_uart_start(UTL_UART_ESP8266);
+  //utl_uart_init(UTL_UART_ESP8266, USART1, 115200);
+  //utl_uart_start(UTL_UART_ESP8266);
   /* USER CODE END 2 */
-
+  //drv_sht21_init();
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+  struct e_module mod_table[10];
+  uint8_t stack[256];
+  uint8_t qstack[2048];
+  e_core_ctor(mod_table, 10, qstack, 2048, stack, 256);
+
+  struct e_timer timers[5];
+  e_module_timers_ctor(timers, 5);
+
+  struct e_module_heartbeat mod_heartbeat;
+  e_module_heartbeat_ctor(&mod_heartbeat, "HEARTBEAT", DRV_LED_HEARTBEAT, 800, 300);
+
+  e_core_add_module((struct e_module*) &mod_heartbeat);
+  e_core_loop();
+
   while (1)
   {
-    utl_uart_run(UTL_UART_ESP8266);
-    utl_run_heartbeat(DRV_LED_HEARTBEAT, 100U, 500U);
+    //utl_uart_run(UTL_UART_ESP8266);
+    //utl_run_heartbeat(DRV_LED_HEARTBEAT, 100U, 500U);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
