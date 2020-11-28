@@ -103,6 +103,11 @@ uint32_t utl_circular_buf_size(utl_circular_buf_handle cbuf) {
   return size;
 }
 
+uint32_t utl_circular_buf_size_free(utl_circular_buf_handle cbuf) {
+  assert_param(cbuf);
+  uint32_t size_free = cbuf->capacity - utl_circular_buf_size(cbuf);
+  return size_free;
+}
 
 uint8_t *utl_circular_buf_get_tail_ptr(utl_circular_buf_handle cbuf) {
   return &cbuf->buf[cbuf->tail];
