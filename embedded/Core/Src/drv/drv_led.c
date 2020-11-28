@@ -11,11 +11,6 @@
 
 #include "drv/drv_led.h"
 
-enum drv_led_state {
-  DRV_LED_STATE_OFF,
-  DRV_LED_STATE_ON,
-};
-
 struct drv_led {
   GPIO_TypeDef* port;
   uint32_t pin;
@@ -44,4 +39,8 @@ void drv_led_toggle(enum drv_led_name me) {
   else {
     drv_led_off(me);
   }
+}
+
+uint8_t drv_led_get_state(enum drv_led_name me) {
+  return leds[me].state;
 }
