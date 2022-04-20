@@ -1,45 +1,95 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="UTF-8">
-  <title>Test</title>
-  <script type="text/javascript">
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <link rel="stylesheet" href="css/zeroing.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript">
+        function LigthSwitch() {
+            alert("Button");
+        }
 
-    function LigthSwitch(){
-      alert("Button");
-    }
-    
-    function loadFile(filePath) {
-      var result = null;
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open("GET", filePath, false);
-      xmlhttp.send();
-      if (xmlhttp.status==200) {
-        result = xmlhttp.responseText;
-      }
-      return result;
-    }
-    
-    let interval = setInterval(ServerCheck, 500);
-    function ServerCheck() {
-        var temperature = loadFile("temperature.txt")
-        var ledStatus = loadFile("ledStatus.txt")
-        document.getElementById("Temperature").value = parseInt(temperature, 10);
+        function loadFile(filePath) {
+            var result = null;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", filePath, false);
+            xmlhttp.send();
+            if (xmlhttp.status == 200) {
+                result = xmlhttp.responseText;
+            }
+            return result;
+        }
 
-        if(parseInt(ledStatus, 10) == 1)
-            document.getElementById("Led").innerHTML="Led is now On";
-        else
-            document.getElementById("Led").innerHTML="Led is now Off";
-    }
-  </script>
+        let interval = setInterval(ServerCheck, 500);
+
+        function updateTemperature(temperature) {
+            document.getElementById("Temperature").value = parseInt(temperature, 10);
+        }
+
+        function updateLed(ledStatus) {
+            if (parseInt(ledStatus, 10) == 1)
+                document.getElementById("ledON").hidden = true;
+            else
+                document.getElementById("ledON").hidden = false;
+        }
+
+        function ServerCheck() {
+            var temperature = loadFile("temperature.txt")
+            var ledStatus = loadFile("ledStatus.txt")
+
+            updateTemperature(temperature);
+            updateLed(ledStatus);
+
+        }
+
+        let counter = true;
+
+        function ChangeStatus() {
+            if (counter == 0) {
+                document.getElementById("butOn").hidden = true;
+                document.getElementById("butOff").hidden = false;
+            } else {
+                document.getElementById("butOn").hidden = false;
+                document.getElementById("butOff").hidden = true;
+            }
+            counter = !counter;
+        }
+    </script>
 </head>
+
 <body>
-  <header>
-    <h1>Smart House Control Panel</h1>
-  </header>
-  <form name="LigthControl" id="LigthControl">
-    <input id="Temperature" value="0"> <input name="Switch" type="button" value="ON/OFF" onclick="LigthSwitch();">
-  </form>
-  <h2 id="Led">Led is now</h2>
+
+    <header>
+        <h1>
+            Smart House control panel
+        </h1>
+    </header>
+    <div class="SWITCH">
+        <div class="name"> Switch</div>
+
+        <div class="statusOn">On</div>
+        <div class="switcher" onclick="ChangeStatus()"> </div>
+        <div class="buttonON" id="butOn" hidden></div>
+        <div class="buttonOFF" id="butOff"></div>
+        <div class="statusOff">Off</div>
+    </div>
+    <div class="TEMPERATURE">
+        <div class="name">Temperature</div>
+        <div class="statusTemp">
+            <form action=" # ">
+                <output id="Temperature">0</output>°C
+            </form>
+
+        </div>
+    </div>
+    <div class="LED ">
+        <div class="name">LED status</div>
+        <div class="led"></div>
+        <div class="ledON"></div>
+    </div>
+
 </body>
+
 </html>
